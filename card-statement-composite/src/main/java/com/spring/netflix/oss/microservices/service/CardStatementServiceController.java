@@ -24,7 +24,9 @@ public class CardStatementServiceController {
      
     @Autowired
     StatementClient statementClient;
-     
+  
+    
+    @HystrixCommand(fallbackMethod = "defaultCardStatementError") 
     @RequestMapping(value="/statement-by-card", method=RequestMethod.GET)
     public ResponseEntity<Map<CardVO, List<StatementVO>>> 
     getStatementByCardId(@RequestParam Long cardId){
